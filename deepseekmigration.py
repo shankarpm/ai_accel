@@ -295,7 +295,10 @@ if st.session_state.stage == "file_selected":
 
 if st.session_state.stage == "code_fixed":
     if st.button("🔁 Start Over"):
+        project_path = st.session_state.project_path
         for key in list(st.session_state.keys()):
-            del st.session_state[key]
+            if key != "project_path":
+                del st.session_state[key]
+        st.session_state.project_path = project_path
         st.session_state.stage = "initial"
         st.rerun()
