@@ -44,11 +44,15 @@ def run_angular_build(project_path):
             shell=True  # Use shell so it can find 'ng'
         )
 
+        output = result.stdout + result.stderr
+
         if result.returncode != 0:
             with open(log_file_path, "w", encoding="utf-8") as f:
                 f.write("Angular Build Failed:\n")
                 f.write(result.stderr)
+            print(result.stdout)
             st.warning(f"Build failed. Errors saved to: {log_file_path}")
+            
             return log_file_path 
         else:
             print("Angular build completed successfully.")
