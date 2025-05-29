@@ -1,0 +1,57 @@
+.filter-container {
+  /*border: 1px solid #bbb;*/
+  top: 0px;
+  color: black !important;
+  position: relative;
+}
+
+.filter-container .k-i-zoom {
+  position: absolute;
+  z-index: 10;
+  top: 7px;
+  left: 7px;
+}
+
+.filter-container .k-textbox {
+  padding-left: 10px;
+  height: 30px;
+  width: 100%;
+}
+
+.filter-container .padding-left {
+  padding-left: 25px;
+}
+
+.filter-container .product-items {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px 0 0 10px;
+  z-index: 10;
+  background: white;
+  position: absolute;
+  box-shadow:0 0 5px rgba(0,0,0,0.8);
+  min-width: 100%;
+  text-align: justify;
+  width: 60px;
+}
+
+.filter-container .separator {
+  margin-bottom: 11px;
+}
+
+.filter-container .filter-box {
+  padding: 0 0px;
+}
+
+.filter-container .product-items label {
+  margin: 0 5px 6px 0;
+  white-space: nowrap;
+}
+
+.relative {
+  position: relative;
+}
+
+::ng-deep body {
+  background: #efefef;
+}

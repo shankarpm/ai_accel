@@ -1,0 +1,20 @@
+<div #kendoUIContainer style="border-radius: 25px;">
+  <kendo-dialog [hidden]="!UI.isSessionTimeout" (close)="UI.isSessionTimeout=false" [height]="300" [width]="500">
+    <ng-container *ngIf="!UI.isSessionTimedout">
+      <h2>Need More Time?</h2>
+      <p style="margin: 20px; text-align: left;">Your session is about to expire and unsaved changes will be lost.</p>
+      <h2 style="margin: 20px; text-align: left;">{{UI.minutes| number:'2.0-0'}}:{{UI.seconds| number:'2.0-0'}}</h2>
+      <p style="margin: 20px; text-align: left;">To continue your session, click "Stay Logged in".</p>
+      <div style="position:absolute;bottom:20px;">
+        <button kendoButton style="margin-left:170px;" (click)="UI.handlers.stayLoggedinClick()">Stay Logged in</button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="UI.isSessionTimedout">
+      <h2>Your session has expired!</h2>
+      <p style="margin: 20px; text-align: left;">Changes not saved have been lost, review entries if necessary. Please click "OK" button to continue</p>
+      <div style="position:absolute;bottom:20px;">
+        <button kendoButton style="margin-left:170px;width:125px;" (click)="UI.handlers.okClick()">OK</button>
+      </div>
+    </ng-container>
+  </kendo-dialog>
+</div>

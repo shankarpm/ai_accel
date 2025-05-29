@@ -1,0 +1,192 @@
+.not-container {
+  z-index: 12;
+  position: absolute;
+  top: 5px;
+  right: 9px;
+  width: 440px;
+  margin: 0 auto;
+  border: none;
+}
+.not-item-main {
+  position: relative;
+  padding: 5px 0 0 10px;
+  overflow-y: auto;
+  min-height: 44px;
+  max-height: 50px;
+  overflow: hidden;
+  width: 50px;
+  left: 150px;
+}
+.not-item {
+  position: relative;
+  padding: 10px 0 0 10px;
+  overflow-y: auto;
+  min-height: 77px;
+  max-height: 85px;
+  border-bottom: 1.5px solid lightgray;
+  border-left: 1.5px solid lightgray;
+  border-right: 1.5px solid lightgray;
+  overflow: hidden;
+  background: #F5FBFE;
+}
+
+  .not-item:last-child {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+    /*border-radius: 5px;*/
+  }
+
+.k-i-x {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  z-index: 11;
+}
+
+.k-i-x {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  z-index: 11;
+}
+
+.k-i-minus {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  z-index: 11;
+}
+
+.k-i-plus {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  z-index: 11;
+}
+
+.circle {
+  background: red;
+  border-radius: 20px;
+  color: white;
+  height: 21px;
+  width: 21px;
+  left: 27px;
+  position: absolute;
+  top: 6px;
+  text-align: -webkit-center;
+}
+
+  .circle p {
+    display: table-caption;
+    margin: 1px 0px 10px;
+    text-align: center;
+    font-size: small;
+  }
+
+.bell {
+  float: left;
+  position: absolute;
+  left: 10px
+}
+
+.not-item-icon {
+  float: left;
+  position: relative;
+  left: -4px;
+  padding: 2px;
+}
+
+.time {
+  top: 32px;
+  position: absolute;
+  left: 59px;
+  font-size: 11px;
+  color: darkgray;
+}
+
+.notification-header {
+  float: right;
+  position: absolute;
+  left: 54px
+}
+
+.k-i-copy {
+  bottom: 2px;
+  position: relative;
+  cursor: pointer;
+}
+
+  .k-i-copy:hover {
+    color: black;
+  }
+
+  .k-i-copy:active {
+    font-size: 15px;
+  }
+
+.bell-click {
+  cursor: pointer;
+}
+
+  .bell-click:hover {
+    color: green;
+  }
+
+  .bell-click:active {
+    color: blue;
+  }
+
+.oval {
+  width: 90px;
+  height: 21px;
+  border-radius: 40px;
+  position: relative;
+  left:28%;
+}
+
+.light-blue {
+  background: #3A9FEB !important;
+}
+
+.gray {
+  background: lightgray !important;
+}
+  
+/*#2998E9*/
+._1gb4 {
+  background-color: #fa3e3e;
+  border-radius: 24px;
+  box-shadow: -1px 1px 2px 0 rgba(0, 0, 0, .3);
+  color: #fff;
+  cursor: default;
+  font-size: 13px;
+  height: 24px;
+  line-height: 24px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  -webkit-user-select: none;
+  width: 24px;
+}
+
+.notification-data-container {
+  height: 600px;
+  overflow: auto;
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 40px;
+}
+
+  .flex-container > div {
+    width: 98px;
+    margin-left: 25px;
+    text-align: center;
+    line-height: 18px;
+    font-size: 5px;
+  }

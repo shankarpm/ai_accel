@@ -1,0 +1,109 @@
+<div>
+  <div [hidden]="appContext.AuthenticationError == ''">
+    <div style="font-size:20px;border:1px solid gray;background-color:yellow;color:black;padding:20px;">
+      There has been an error retrieving your security information. Please contact support for assistance.
+    </div>
+    <div style="padding:20px;border:1px solid gray;background-color:#eeeeee">
+      {{appContext.AuthenticationError}}
+    </div>
+  </div>
+
+  <div *ngIf="isCompass" [hidden]="!appContext.Authenticated">
+    <div [hidden]="!loadingData">
+      <loading-spinner-component></loading-spinner-component>
+    </div>
+
+    <div #kendoUIContainer class="event-management__container">
+      <compass-plan-selection-header-component #compassPlanSelectionHeader (GetPlanSelectionHeaderValues)="getPlanSelectionHeaderValues($event)"></compass-plan-selection-header-component>
+    </div>
+    <div class="row" style="margin:10px;line-height: 35px;">
+      <button type="button" kendoButton class="k-button" (click)="addChart()"><i class="fa fa-plus-circle"></i>Add Sections</button>
+      <kendo-multiselect [data]="objectList" [(ngModel)]="currentCharts" [filterable]="true" style="width:93%;float:right" [textField]="'OBJECT_NAME'"
+                         [valueField]="'OBJECT_ID'" (valueChange)="onValueChange($event)" [hidden]="addchartselectDisabled"></kendo-multiselect>
+    </div>
+
+    <div>
+      <div *ngIf="messages.length > 0" style="float:left;width:630px">
+        <div class="imagewidget" style="margin-right:10px !important; height:600px; width:580px;float:left;">
+          <!--<div class="chartHeader">Communication Hub</div>-->
+          <kendo-grid [data]="messages" [height]="590">
+            <kendo-grid-column field="MESSAGE">
+              <ng-template kendoGridHeaderTemplate>
+                <div style="width:100%;text-align:center;"><h4>Communication Hub</h4></div>
+              </ng-template>
+            </kendo-grid-column>
+          </kendo-grid>
+        </div>
+      </div>
+
+      <div style="float:left;width:calc(100% - 970px);min-width:460px;">
+        <div class="col-xs-4 imagewidget" *ngIf="getChartVisibility('GSV LE vs AOP')">
+          <span class="k-icon k-i-close" style="cursor:pointer; float:right; width:15px; height:15px;" (click)="closeChart('GSV LE vs AOP')"> </span>
+          <kendo-chart [categoryAxis]="{ categories: gsvmonths }" class="kendoChart">
+            <kendo-chart-title text="{{chartCategoryName}}"></kendo-chart-title>
+            <kendo-chart-legend position="bottom" orientation="horizontal"></kendo-chart-legend>
+            <kendo-chart-tooltip format="{0:n0}"></kendo-chart-tooltip>
+            <kendo-chart-series>
+              <kendo-chart-series-item type="line" [data]="gsvdata">
+              </kendo-chart-series-item>
+            </kendo-chart-series>
+          </kendo-chart>
+        </div>
+        <div class="col-xs-4 imagewidget" *ngIf="getChartVisibility('Trade Rate by Month')">
+          <span class="k-icon k-i-close" style="cursor:pointer; float:right; width:15px; height:15px;" (click)="closeChart('Trade Rate by Month')"> </span>
+          <kendo-chart [categoryAxis]="{ categories: gsvmonths }" class="kendoChart">
+            <kendo-chart-title text="Trade Rate by Month"></kendo-chart-title>
+            <kendo-chart-legend position="bottom"></kendo-chart-legend>
+            <kendo-chart-tooltip format="{0:n0}"></kendo-chart-tooltip>
+            <kendo-chart-series>
+              <kendo-chart-series-item [data]="tradedata">
+              </kendo-chart-series-item>
+              <!--<kendo-chart-series-item type="line" [data]="tradedata">
+              </kendo-chart-series-item>-->
+            </kendo-chart-series>
+          </kendo-chart>
+        </div>
+        <div class="col-xs-4 imagewidget" *ngIf="getChartVisibility('Current Month Bookings vs Forecast')">
+          <span class="k-icon k-i-close" style="cursor:pointer; float:right; width:15px; height:15px;" (click)="closeChart('Current Month Bookings vs Forecast')"> </span>
+          <kendo-chart [categoryAxis]="{ categories: gsvmonths }" class="kendoChart">
+            <kendo-chart-title text="Current Month Bookings vs Forecast"></kendo-chart-title>
+            <kendo-chart-legend position="bottom"></kendo-chart-legend>
+            <kendo-chart-tooltip format="{0:n0}"></kendo-chart-tooltip>
+            <kendo-chart-series>
+              <kendo-chart-series-item type="bar" [stack]="{ type: '100%' }" [data]="data1">
+              </kendo-chart-series-item>
+              <kendo-chart-series-item type="bar" [data]="data2">
+              </kendo-chart-series-item>
+            </kendo-chart-series>
+          </kendo-chart>
+        </div>
+        <div class="col-xs-4 imagewidget" *ngIf="getChartVisibility('Events')">
+          <span class="k-icon k-i-close" style="cursor:pointer; float:right; width:15px; height:15px;" (click)="closeChart('Events')"> </span>
+          <kendo-grid [data]="gridData" [selectable]="true" class="kendoChart" style="margin-top:20px; height:230px !important">
+            <kendo-grid-column field="EventId" title="Event ID">
+            </kendo-grid-column>
+            <kendo-grid-column field="EventName" title="Event Name">
+            </kendo-grid-column>
+            <kendo-grid-column field="Reason" title="Reason">
+            </kendo-grid-column>
+            <kendo-grid-column field="Action" title="Action">
+            </kendo-grid-column>
+          </kendo-grid>
+        </div>
+      </div>
+      <div style="float:right;width:320px;">
+        <div class="imagewidget" style="height:600px; width:300px;float:left;" *ngIf="getChartVisibility('Sales Calendar')">
+          <span class="k-icon k-i-close" style="cursor:pointer; float:right; width:15px; height:15px;" (click)="closeChart('Sales Calendar')"> </span>
+          <div class="chartHeader">Sales Calendar</div>
+          <kendo-calendar [navigation]="false" [value]="avalue" style="margin:10px;"></kendo-calendar>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isCompass" style="margin:20px;" [hidden]="!appContext.Authenticated">
+      <div style="display:inline-block;">
+        <river-dashboard-component></river-dashboard-component>
+      </div>
+    </div>
+  </div>
+

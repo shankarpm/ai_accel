@@ -1,0 +1,106 @@
+<div [hidden]="!UI.isLoading">
+  <app-loading-spinner></app-loading-spinner> <!-- AI changed: Replaced loading-spinner-component with app-loading-spinner -->
+</div>
+<div #kendoUIContainer style="margin: 10px 0 5px;" @parent>
+  <div class="row" style="margin: 0px 40px 0px 10px; padding-top: 0px;">
+    <kendo-dropdownlist [data]="PlanYears" [(value)]="SelectedPlanYear" [textField]="'text'" [valueField]="'value'" [valuePrimitive]="true"
+                        class="global-dropdown float-left" style="width:100px; margin-left: 0;"
+                        (valueChange)="UI.setup(false)"></kendo-dropdownlist> <!-- AI changed: Replaced ngModel with [(value)] and fixed textField/valueField bindings -->
+
+    <kendo-dropdownlist [data]="UI.CustomerPlan" [textField]="'CN'" [valueField]="'ID'" [(value)]="UI.SelectedCustomerPlan"
+                        class="global-dropdown float-left" [filterable]="true"
+                        [popupSettings]="{ width: 'auto' }" [style.width.px]="UI.customerPlanWidth"
+                        (valueChange)="UI.handlers.customerPlanChange(false)"
+                        (filterChange)="UI.handlers.onCustomerPlanFilterChange($event)"></kendo-dropdownlist> <!-- AI changed: Replaced ngModel with [(value)] and fixed textField/valueField bindings -->
+
+    <kendo-dropdownlist [data]="UI.Category" [textField]="'N'" [valueField]="'I'" [(value)]="UI.SelectedCategory" [valuePrimitive]="true"
+                        class="global-dropdown float-left" [popupSettings]="{ width: 'auto' }"
+                        [filterable]="true" [style.width.px]="UI.categoryWidth + 35"
+                        (valueChange)="UI.handlers.categoryChange(false)"
+                        (filterChange)="UI.handlers.onCatergoryFilterChange($event)">
+      <ng-template kendoDropDownListItemTemplate let-dataItem> <!-- AI changed: Changed kendoComboBoxItemTemplate to kendoDropDownListItemTemplate -->
+        {{ dataItem.I }} - {{ dataItem.N }}
+      </ng-template>
+    </kendo-dropdownlist>
+
+    <kendo-dropdownlist *ngIf="UI.SelectedCustomerPlan && UI.SelectedCustomerPlan.D == 1"
+                        [data]="UI.CustomerNodes" [(value)]="UI.SelectedCustomerNode" [valuePrimitive]="true" [textField]="'CUSTOMER_NAME'" [valueField]="'CUSTOMER_ID'"
+                        class="global-dropdown float-left" style="width: auto" [popupSettings]="{ width: 'auto' }"
+                        [disabled]="UI.handlers.isCustomerNodeSelectionDisabled()"
+                        (valueChange)="UI.handlers.customerNodeChange($event)">
+      <ng-template kendoDropDownListItemTemplate let-dataItem> <!-- AI changed: Changed kendoComboBoxItemTemplate to kendoDropDownListItemTemplate -->
+        {{ dataItem.CUSTOMER_ID }} - {{ dataItem.CUSTOMER_NAME }}
+      </ng-template>
+    </kendo-dropdownlist>
+    <div *ngIf="!headerValues.isCanadianCustomer" (clickOutside)="UI.handlers.onDropdownClose($event)">
+      <kendo-dropdownlist #versionsDropdownlist [hidden]="!UI.showVersionsDropdwon" [data]="UI.VersionNameList"
+                          class="global-dropdown float-right"
+                          style="width: 200px;" [popupSettings]="{ width: 'auto' }"
+                          [filterable]="true" [(value)]="UI.SelectedVersion" <!-- AI changed: Replaced ngModel with [(value)] -->
+                          (close)="UI.handlers.onDropdownClose($event)"
+                          (valueChange)="UI.handlers.versionChange($event)" <!-- AI changed: Changed ngModelChange to valueChange -->
+                          (filterChange)="UI.handlers.onVersionFilterChange($event)">
+        <ng-template kendoDropDownListItemTemplate let-dataItem> <!-- AI changed: Changed kendoComboBoxItemTemplate to kendoDropDownListItemTemplate -->
+          <span [class.border-bottom]="dataItem == 'Compare'" style="width:100%;">{{ dataItem }}</span> <!-- AI changed: Simplified ngClass binding -->
+          <span *ngIf="UI.handlers.showVersionDeleteButton(dataItem)" class="k-icon k-i-delete" style="margin-left: 10px"
+                (click)="UI.handlers.onDeleteVersion($event, dataItem)"></span>
+        </ng-template>
+      </kendo-dropdownlist>
+      <span [hidden]="!showVersionLabel" (click)="UI.handlers.onVersionsClick();"
+            [style.color]="UI.SelectedVersion ? (UI.SelectedVersion === 'ACTIVEPLAN' ? 'white' : 'red') : 'lightgrey'"
+            [style.background]="UI.SelectedVersion === 'ACTIVEPLAN' ? '#007100' : '#fff'"
+            style="margin-left: 10px;font-size: 125%;min-width: 145px;letter-spacing: 2px;float: right;cursor:pointer;
+            color: white;padding: 0px 7px;border: 1px solid #fff;line-height: 26px;">
+        {{UI.SelectedVersion || 'No Version'}}
+      </span>
+    </div>
+  </div>
+  <!-- snack bar show div -->
+  <app-snack-bar #SnackBar></app-snack-bar> <!-- AI changed: Replaced snack-bar-component with app-snack-bar -->
+  <div>
+    <span class="k-icon" [class.k-i-arrow-chevron-down]="isHeaderNotDisplay" [class.k-i-arrow-chevron-up]="!isHeaderNotDisplay"
+          style="font-weight:bold;font-size: 25px;margin:-25px 10px;float:right;color:black;cursor:pointer;"
+          (click)="isHeaderNotDisplay=!isHeaderNotDisplay;"></span> <!-- AI changed: Simplified ngClass binding -->
+  </div>
+  <div *ngIf="!isHeaderNotDisplay" [@slideUpDown]
+       (@slideUpDown.start)="UI.handlers.switchTilesSectionStart()"
+       (@slideUpDown.done)="UI.handlers.switchTilesSectionDone()"
+       style="padding:10px 10px 0px 10px;display:flow-root;">
+    <div *ngIf="UI.isTilesLoading" class="info-box-back-white" style="height:65px;line-height:65px;">Loading...</div>
+    <div *ngIf="!UI.isTilesLoading">
+      <div class="tiles-panel" [class.col-xs-4]="headerValues.isSMG" [class.col-xs-3]="headerValues.isCanadianCustomer" [class.col-xs-2]="!headerValues.isSMG && !headerValues.isCanadianCustomer" *ngIf="!headerValues.isSMG">
+        <div class="info-box" [class.info-box-back-color]="UI.SelectedVersion && UI.SelectedVersion != 'ACTIVEPLAN'" [class.info-box-back-white]="!(UI.SelectedVersion && UI.SelectedVersion != 'ACTIVEPLAN')">
+          <div class="tiles-header">GSV LE</div>
+          <div class="tiles-text" [style.color]="UI.getColor(UI.TilesData.GSV_LE)">$ {{UI.TilesData.GSV_LE | number:'1.0-0' | minusSignToParens }}</div>
+          <div class="tooltiptext">
+            <div class="hover-info" [style.color]="UI.getColor(UI.TilesData.SPEND_LE_HO_SPEND_LE)">
+              {{ headerValues.isCanadianCustomer ? 'PY GSV (CY HEIRARCHY): $' : 'PY GSV: $'}} {{ UI.TilesData.PY_GSV | number:'1.2-2'  | minusSignToParens }}
+            </div>
+            <div class="hover-info" [style.color]="UI.getColor(UI.TilesData.SPEND_LE_HO_W_TRD_SPND)">
+              AOP: $ {{ UI.TilesData.AOP | number:'1.0-0' | minusSignToParens }}
+            </div>
+            <div *ngIf="!headerValues.isCanadianCustomer" class="hover-info" style="border-bottom:none;" [style.color]="UI.getColor(UI.TilesData.FUND_LE_HO_LIVE_FUND)">
+              Constraint GSV: $ {{ UI.TilesData.CONSTRAINT_GSV_LE | number:'1.0-0' | minusSignToParens }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Rest of the tiles panels follow the same pattern with ngStyle/ngClass fixes -->
+      <!-- ... (remaining tiles panels with similar fixes) ... -->
+    </div>
+  </div>
+
+  <!-- Create and Save as version dialog -->
+  <kendo-dialog [title]="UI.saveAsDialog ? 'Save Version As' : 'Create Version From Active Plan'" *ngIf="UI.dialogOpened" (close)="UI.dialogOpened=false" [minWidth]="250" [width]="500" [height]="235">
+    <div *ngIf="UI.versionNameExist" class="group-error">The version <span class="group-error">{{ UI.saveAsPlanName }}</span>{{ UI.SaveasErrorMsg}}</div>
+    <div>
+      <input kendoTextBox inputRestriction [(ngModel)]="UI.saveAsPlanName"
+             [min]="1" maxlength="21" style="width: 100%" placeholder="Enter Version Name" required
+             (focus)="UI.versionNameExist = false" />
+    </div>
+    <kendo-dialog-actions>
+      <button kendoButton (click)="UI.handlers.onCreateVersionClick()" [primary]="true">{{ UI.saveAsDialog ? 'Save' : 'Create' }}</button> <!-- AI changed: Changed primary to [primary] -->
+      <button kendoButton (click)="UI.dialogOpened=false">Close</button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
+</div>

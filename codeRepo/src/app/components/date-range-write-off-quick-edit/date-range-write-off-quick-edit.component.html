@@ -1,0 +1,45 @@
+<!-- Edlp Dialog -->
+<div #kendoUIContainer>
+  <div class="col-xs-12" style="margin-bottom: 20px;">
+    <p style="margin-bottom: 5px; font-weight: bold; font-size: 16px;">Write Off Manual</p>
+    <kendo-numerictextbox #writeOffManual style="padding-right: 30px" [spinners]="false" [(ngModel)]="UI.quickEditWriteOffManualContent"
+                          (ngModelChange)="UI.handlers.onModelChange(1)" [min]="0" [autoCorrect]="true">
+    </kendo-numerictextbox>
+  </div>
+  <div class="col-xs-12" style="margin-bottom: 20px;">
+    <p style="margin-bottom: 5px; font-weight: bold; font-size: 16px;">Write Off Auto</p>
+    <kendo-numerictextbox #writeOffAuto style="padding-right: 30px" [spinners]="false" [(ngModel)]="UI.quickEditWriteOffAutoContent"
+                          (ngModelChange)="UI.handlers.onModelChange(2)" [min]="0" [autoCorrect]="true">
+    </kendo-numerictextbox>
+  </div>
+  <div class="col-xs-12" style="margin-bottom: 20px;">
+    <p style="margin-bottom: 5px; font-weight: bold; font-size: 16px;">Write Off Tolerance</p>
+    <kendo-numerictextbox #writeOffTolerance style="padding-right: 30px" [spinners]="false" [(ngModel)]="UI.quickEditWriteOffToleranceContent"
+                          (ngModelChange)="UI.handlers.onModelChange(3)" [min]="0" [autoCorrect]="true">
+    </kendo-numerictextbox>
+  </div>
+  <div class="col-xs-12" style="margin-bottom: 20px;">
+    <p style="margin-bottom: 5px; font-weight: bold; font-size: 16px;">Select Date Range</p>
+    <kendo-combobox #dateRangeCombobox [data]="['Annual', 'Quarterly', 'Monthly', 'Weekly']"
+                    [(ngModel)]="UI.SelectedDateRange" (selectionChange)="UI.handlers.DateRange_SelectionChange($event)"></kendo-combobox>
+  </div>
+
+  <div class="col-xs-12" style="margin-bottom: 20px;">
+    <p style="margin-bottom: 5px; font-weight: bold; font-size: 16px;">Select Dates</p>
+    <select #dateMultiselect multiple="multiple" data-placeholder="Select Dates..."></select>
+    <!--<kendo-multiselect #dateMultiselect [data]="UI.DateRangeData"
+                       [autoClose]="false"
+                       [disabled]="UI.SelectedDateRange=='' || UI.SelectedDateRange=='Annual'"
+                       [(ngModel)]="UI.SelectedDates">
+    </kendo-multiselect>-->
+  </div>
+
+  <div class="col-xs-12" style="margin-bottom: 20px;">
+    <p style="margin-bottom: 5px; font-weight: bold; font-size: 16px;">{{ UI.UnitPriceTitle }}</p>
+    <kendo-numerictextbox [spinners]="false"
+                          [step]="1"
+                          placeholder="Enter Value"
+                          [disabled]="true"
+                          [(ngModel)]="UI.quickEditWriteOffTotal"></kendo-numerictextbox>
+  </div>
+</div>

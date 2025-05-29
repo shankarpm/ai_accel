@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row" id="pwd-container" style="width:100%;text-align:center;">
+    <div style="width:25%;display:inline-block;">
+      <section class="login-form">
+        
+        <div class="row" style="text-align:center;margin-top:100px;">
+          <img src="../../../assets/logo/logo_main.png" class="img-responsive" alt="kraft-heinz logo" style="display:block;margin:auto;" />
+        </div>
+        <div class="row" style="margin-top:20px;">
+          <input type="email" name="email" placeholder="user" required class="form-control input-lg" [(ngModel)]="userName" />
+        </div>
+        <div class="row" style="margin-top:20px;">
+          <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" [(ngModel)]="password" />
+        </div>
+        <div class="row" style="margin-top:20px;">
+          <button (click)="tryLogin()" class="btn btn-lg btn-primary btn-block">Sign in</button>
+        </div>
+        <div class="row" style="margin-top:20px;">
+          <span style="color:red;"><b>{{authenticationResult}}</b></span>
+        </div>
+
+        
+      </section>
+    </div>
+  </div>
+</div>

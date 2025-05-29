@@ -1,0 +1,49 @@
+<div class="filter-container" [style.width]="percentWidth" (clickOutside)="clickOutside()"> <!-- AI changed: [ngStyle] to [style.width] for Angular 19 compatibility -->
+  <div class="relative filter-box" *ngIf="!comboBox"> <!-- AI changed: kept *ngIf as it's still supported in Angular 19 -->
+    <span class="k-icon k-i-zoom"></span>
+    <input kendoTextBox [(ngModel)]="filterKey" [disabled]="disabled" [placeholder]="placeholder" (click)="listOpened=true" (ngModelChange)="onChange($event)" class="padding-left" /> <!-- AI changed: [ngModel] to [(ngModel)] for two-way binding -->
+  </div>
+  <div class="k-widget k-combobox k-header k-combobox-clearable" *ngIf="comboBox" style="width: 100%"> <!-- AI changed: kept *ngIf as it's still supported in Angular 19 -->
+    <span unselectable="on" class="k-dropdown-wrap k-state-default">
+      <input autocomplete="off" size="1" class="k-input" [(ngModel)]="filterKey" [placeholder]="placeholder" (ngModelChange)="onChange($event)"> <!-- AI changed: [ngModel] to [(ngModel)] for two-way binding -->
+      <span unselectable="on" class="k-select" (click)="dataProvider.length > 0 ? listOpened=!listOpened : listOpened=false">
+        <span class="k-i-arrow-s k-icon"></span>
+      </span>
+    </span>
+  </div>
+  <div class="product-items" [hidden]="!listOpened || dataProvider.length === 0">
+    <div *ngIf="selectAll"> <!-- AI changed: kept *ngIf as it's still supported in Angular 19 -->
+      <label class="k-form-field">
+        <input id="auth-select-all-{{ valueField }}"
+               type="checkbox"
+               class="k-checkbox"
+               [(ngModel)]="selectAllModel" <!-- AI changed: kept [(ngModel)] as it's still supported in Angular 19 -->
+               (ngModelChange)="onSwitchSelectAll()">
+        <label class="k-checkbox-label" for="auth-select-all-{{ valueField }}">Select all</label>
+      </label>
+    </div>
+    <div *ngIf="!selectAll"> <!-- AI changed: kept *ngIf as it's still supported in Angular 19 -->
+      <label class="k-form-field">
+        <input id="auth-select-all-{{ valueField }}"
+               type="checkbox"
+               class="k-checkbox"
+               [(ngModel)]="selectAllModel" <!-- AI changed: kept [(ngModel)] as it's still supported in Angular 19 -->
+               (ngModelChange)="onSwitchSelectAll()">
+        <label class="k-checkbox-label" for="auth-select-all-{{ valueField }}">Select all</label>
+      </label>
+    </div>
+    <div *ngFor="let item of dataProvider; let rowIndex = index"> <!-- AI changed: kept *ngFor as it's still supported in Angular 19 -->
+      <div class="separator" [hidden]="!item.separator"></div>
+      <label class="k-form-field">
+        <input id="auth-{{ rowIndex }}-{{ item.prefix }}"
+               type="checkbox"
+               class="k-checkbox"
+               [(ngModel)]="item.selected" <!-- AI changed: kept [(ngModel)] as it's still supported in Angular 19 -->
+               [disabled]="item.disabled"
+               (ngModelChange)="onSwitchProduct(item)">
+        <label *ngIf="item.prefix" class="k-checkbox-label" for="auth-{{ rowIndex }}-{{ item.prefix }}">{{ item[valueField] }}</label> <!-- AI changed: kept *ngIf as it's still supported in Angular 19 -->
+        <label *ngIf="!item.prefix" class="k-checkbox-label" style="z-index:-1" for="auth-{{ rowIndex }}-{{ item.prefix }}">{{ item[valueField] }}</label> <!-- AI changed: kept *ngIf as it's still supported in Angular 19 -->
+      </label>
+    </div>
+  </div>
+</div>

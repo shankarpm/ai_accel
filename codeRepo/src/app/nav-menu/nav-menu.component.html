@@ -1,0 +1,255 @@
+<div id="sidebar-overlay" *ngIf="overlay"></div>
+<div id="wrapper">
+  <!-- Sidebar -->
+  <div class="navbar-topbar navbar navbar-light container-fluid" style="background-color: #ffffff;min-width:1000px;" *ngIf="appContext.Authenticated">
+    <div class="navbar-contents row">
+      <div class="navbar-topbar-item navbar-icon" style="width:5%">
+        <span (click)="mouseenter()" (mouseleave)="mouseleave()">
+          <i class="fa fa-bars fa-1x fa-border"></i>
+        </span>
+      </div>
+
+      <div class="navbar-topbar-item navbar-logo" style="width:16%">
+        <img src="../../assets/logo/compass.png"/>
+        <!-- <img src="../../assets/logo/River.png" style="height:40px;" *ngIf="!showCompassLogo" /> River logo permanently removed -->
+      </div>
+      
+      <div style="color:#204173;font-size: 24px;display: inline-block; text-align:center;width:57%; vertical-align: middle;">
+        <span style="float: left; font-weight: bold; font-size: 28px;" [ngStyle]="{color:colorName.value}" *ngIf="!showCompassLogo">{{msgYear.value}}</span>
+        {{pageHeader}}
+        <span style="float:right;color:red;">{{environment}}</span>
+      </div>
+
+      <div class="navbar-user-name" style="color:#204173;" (contextmenu)="clearLocalCache($event);">
+        {{appContext.userInfo.FirstName + " " + appContext.userInfo.LastName}}
+      </div>
+    </div>
+  </div>
+  <!-- Collapsible content -->
+  <div id="sidebar-wrapper" [style.width]="(isExpanded == false) ? '0' : '250px' " (mouseenter)="mouseenter()" (mouseleave)="mouseleave()" [hidden]="!appContext.Authenticated">
+    <ul class="sidebar-nav">
+      <li [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+        <a [routerLink]='["/"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-home'></span> Dashboard
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="!isCompass">
+        <a [routerLink]='["/custom-client-group-manager"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-education'></span> Custom Groups
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="!isCompass">
+        <a [routerLink]='["/planning-editor"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-th-list'></span> Planning Manager
+        </a>
+      </li>
+      <!--<li [routerLinkActive]='["link-active"]' *ngIf="!isCompass">
+    <a [routerLink]='["/merge-plans"]' (click)='collapse()'>
+      <span class='glyphicon glyphicon-th-list'></span> Merge Plans
+    </a>
+  </li>-->
+      <li [routerLinkActive]='["link-active"]' *ngIf="!isCompass">
+        <a [routerLink]='["/output-to-reveal"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-th-list'></span> Output To Reveal
+        </a>
+      </li>
+
+      <li [routerLinkActive]='["link-active"]' *ngIf="!isCompass">
+        <a [routerLink]='["/planning-drivers"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-th-list'></span> POS Drivers
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="!isCompass">
+        <a [routerLink]='["/planning-lsv-drivers"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-th-list'></span> LSV Drivers
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isAdminUser">
+        <a [routerLink]='["/admin-control-panel"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-asterisk'></span> Admin Control Panel
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="!isCompass" [hidden]="!isZKFTCCMRole">
+        <a [routerLink]='["/user-security-data"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-th-list'></span> User Security Data
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="!isCompass">
+        <a [routerLink]='["/cpf-export-data"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-th-list'></span> CPF Export Data
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="!isCompass">
+        <a [routerLink]='["/create-mops"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-th-list'></span> Create MOPs in SFDC
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isCompass && !isSMGCheckbook && !showCustSettingSD">
+        <a [routerLink]='["/authorization-list"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-cog'></span> Customer Settings
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isCompass && !isSMGCheckbook && !isCanadaAllCateg">
+        <a [routerLink]='["/customer-authorization-list"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-check'></span> Customer Authorization
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isCompass && !isSMGCheckbook && !isCanadaAllCateg">
+        <a [routerLink]='["/accounts-planner"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-stats'></span> Accounts Planner
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isCompass && !isSMGCheckbook && !isCanadaAllCateg">
+        <a [routerLink]='["/event-management"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-random'></span> Event Management
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isCompass">
+        <a [routerLink]='["/financials"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-usd'></span> Financials
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isCompass && !isSMGCheckbook && !isCanadaAllCateg">
+        <a [routerLink]='["/merch-calendar"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-calendar'></span> Merch Calendar
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isCompass && !isSMGCheckbook && !isCanadaAllCateg">
+        <a [routerLink]='["/shipper-mod"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-oil'></span> Shipper Mod
+        </a>
+      </li>
+      <!--<li [routerLinkActive]='["link-active"]' *ngIf="isCompass">
+    <a [routerLink]='["/khbm-bridge"]' (click)='collapse()'>
+      <span class='glyphicon glyphicon-road'></span> KHBM Bridge
+    </a>
+  </li>-->
+      <li [routerLinkActive]='["link-active"]' *ngIf="isCompass && !isCanada && !isSMGCheckbook">
+        <a [routerLink]='["/compare-plans"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-equalizer'></span> Compare Plans
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isCompass && !isSMGCheckbook && !isCanadaAllCateg">
+        <a [routerLink]='["/publishing"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-export'></span> Publishing
+        </a>
+      </li>
+      <!--<li [routerLinkActive]='["link-active"]' *ngIf="isCompass && !isSMGCheckbook && !isCanadaAllCateg">
+    <a [routerLink]='["/ppg-revenue"]' (click)='collapse()'>
+      <span class='glyphicon glyphicon-th-list'></span> PPG Revenue
+    </a>
+  </li>-->
+      <li [routerLinkActive]='["link-active"]' *ngIf="isPolarisUser && isCompass && !isSMGCheckbook && !isCanadaAllCateg">
+        <a [routerLink]='["/polaris"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-th-list'></span> Polaris Optimization
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isPolarisUser && isCompass && !isSMGCheckbook && !isCanadaAllCateg">
+        <a [routerLink]='["/polaris-simulation"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-th-list'></span> Polaris Simulation
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isPolarisUser && isCompass && !isSMGCheckbook && !isCanadaAllCateg">
+        <a [routerLink]='["/polaris-calendar"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-th-list'></span> Polaris Calendar
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="isCompass">
+        <a [routerLink]='["/tableau-integration"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-screenshot'></span> Sales Intelligence
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]' *ngIf="showMassActivities && !isSMGCheckbook">
+        <a [routerLink]='["/mass-activities"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-new-window'></span> Mass Activities
+        </a>
+      </li>
+
+      <li *ngIf="isCompass && !isCanada && !isSMGCheckbook && showMassActivities">
+        <a (click)='onOBRDashboardClick()'>
+          <span class='glyphicon glyphicon-dashboard'></span> OBR-G&G-DQ
+        </a>
+      </li>
+
+      <li *ngIf="isCompass">
+        <a href="{{ compassPowerBIReportLink }}" target="_blank">
+          <span class='glyphicon glyphicon-list-alt'></span> Compass Power BI Reporting
+        </a>
+      </li>
+
+
+      <!--<li [routerLinkActive]='["link-active"]' *ngIf="isCanada">
+    <a (click)='goToPolaris()' style="cursor:pointer">
+      <span class='glyphicon glyphicon-certificate'></span> Polaris
+    </a>
+  </li>-->
+      <!--<li class="polaris-menu-item" *ngIf="isCanada">
+    <a (mouseenter)="overlay=!overlay" (mouseleave)="overlay=!overlay">
+      <span class="glyphicon"><img src="../assets/polaris/polaris.svg" /></span>
+      <b>Polaris</b>
+    </a>
+    <ul class="polaris-submenu">
+      <li (click)="goToPolaris('Generate')">
+        <a>
+          <span>Generate</span>
+          <img src="../assets/polaris/external-link-white.svg" />
+        </a>
+      </li>
+      <li (click)="goToPolaris('Simulate')">
+        <a>
+          <span>Simulate</span>
+          <img src="../assets/polaris/external-link-white.svg" />
+        </a>
+      </li>
+      <li (click)="goToPolaris('Calendar')">
+        <a>
+          <span>Calendar</span>
+          <img src="../assets/polaris/external-link-white.svg" />
+        </a>
+      </li>
+    </ul>
+    <div class="polaris-tooltip" *ngIf="overlay">
+      <div>New features</div>
+      <p>River is now integrated with Polaris</p>
+      <div class="new-feature-desc">
+        <img src="../assets/polaris/check.svg" />
+        <span>Data will sync between both programs.</span>
+      </div>
+      <div class="new-feature-desc">
+        <img src="../assets/polaris/check.svg" />
+        Click these features to access them in Polaris.
+      </div>
+    </div>
+  </li>-->
+      <!--<li [routerLinkActive]='["link-active"]' *ngIf="isCompass">
+    <a [routerLink]='["/support-panel"]' (click)='collapse()'>
+      <span class='glyphicon glyphicon-cog'></span> Support Panel
+    </a>
+  </li>-->
+      <!--<li [routerLinkActive]='["link-active"]' *ngIf="isCompass && !isSMGCheckbook ">
+    <a (click)='onFundingClick()' style="cursor:pointer">
+      <span class='glyphicon glyphicon-th-list'></span> Funding
+    </a>
+  </li>-->
+      <!-- Hidden untill the Salesforce integration is ready
+      <li [routerLinkActive]='["link-active"]' *ngIf="isCompass && isCanada">
+    <a [routerLink]='["/routine-57"]' (click)='collapse()'>
+      <span class='glyphicon glyphicon-th-list'></span> Routine 57
+    </a>
+  </li>-->
+      <!--<li [routerLinkActive]='["link-active"]' *ngIf="isCompass">
+    <a [routerLink]='["/shipper-mod"]' (click)='collapse()'>
+      <span class='glyphicon glyphicon-road'></span> Shipper Mod
+    </a>
+  </li>-->
+      <!--<li [routerLinkActive]='["link-active"]'>
+    <a [routerLink]='["/csp-snapshot-administration"]' (click)='collapse()'>
+      <span class='glyphicon glyphicon-education'></span> Snapshot Admin
+    </a>
+  </li>-->
+    </ul>
+  </div>
+  <!-- /#sidebar-wrapper -->
+</div>
+<!-- /#wrapper -->
+<!-- Menu Toggle Script -->

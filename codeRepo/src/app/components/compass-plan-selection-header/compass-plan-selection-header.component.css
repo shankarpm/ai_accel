@@ -1,0 +1,79 @@
+.global-dropdown {
+  margin-left: 10px;
+}
+
+.tiles-panel {
+  font-family: Roboto;
+  padding: 0px !important;
+}
+
+.info-box {
+  /*background-color: #ffffff;*/
+  color: #000000;
+  border: 1px solid #ccc;
+  height: 65px;
+  text-align: left;
+  padding: 0 0 0 10px;
+  border-right-width: 0px;
+}
+
+.info-box-back-color {
+  background: linear-gradient(to bottom, #2c6f9c 0%,#e6f3fd 100%) !important;
+}
+
+.info-box-back-white {
+  background-color: #ffffff;
+}
+
+.info-box.last {
+  border-right-width: 1px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid grey;  
+}
+
+.tiles-header {
+  font-weight: bolder;
+  font-size: 24px;
+}
+
+.tiles-text {  
+  font-size: 18px;
+}
+
+.hover-info {
+  border-bottom: 1px solid grey;
+  padding: 0px;
+  font-weight: normal;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 12px;
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 11;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.info-box:hover .tooltiptext {
+  visibility: visible;
+}
+
+::ng-deep .k-switch-label-on, ::ng-deep .k-switch-label-off {
+  width: 6.5em;
+}
+
+::ng-deep .k-switch-label-on {
+  left: -6.7em;
+}
+
+::ng-deep .k-switch-label-off {
+  left: 2.2em;
+}

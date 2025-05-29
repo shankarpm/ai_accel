@@ -1,0 +1,38 @@
+
+
+<div class="not-container">
+  <div>
+    <div class="not-item-main">
+      <div style="padding-top: 5px;">
+        <div class="bell-click" (click)="collapse();">
+          <div class="bell"><i class="fa fa-bell fa-2x"></i></div>
+          <!--<span class="_1gb4" title="2 new notifications">21</span>-->
+          <div class="circle" *ngIf="bellClicked" title="new notification (s)">
+            <p>{{notificationListModel.NewCount }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!collapsed">
+      <div class="notification-data-container">
+        <div *ngFor="let notification of notificationListModel.Notification">
+          <div class="not-item" *ngFor="let item of notification.PPGS">
+            <div class="not-item-icon"><i class="fa fa-{{item.icon}} fa-2x"></i></div>
+            <div style="padding: 0 1px 1px;">
+              <span>{{ item.NotificationText }}</span>
+            </div>
+            <div class="flex-container">
+              <div>
+                <button type="button" kendoButton class="oval light-blue" (click)="takeAction_click(item)">{{item.buttonText1}}</button>
+              </div>
+              <div *ngIf="item.ActionButton && item.ACTION ==''">
+                <button type="button" kendoButton class="oval gray" (click)="dismiss_click(item)">{{item.buttonText2}}</button>
+              </div>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

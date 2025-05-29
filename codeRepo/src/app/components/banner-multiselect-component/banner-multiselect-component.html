@@ -1,0 +1,60 @@
+<div [hidden]="!UI.loadingData">
+  <!-- AI changed: Replaced loading-spinner-component with mat-spinner from Angular Material -->
+  <mat-spinner></mat-spinner>
+</div>
+<div id="planning-editor-wizard" #kendoUIContainer [hidden]="!UI.ready">
+  <!-- Customer Combobox -->
+  <div class="row">
+    <div class="col-md-2 field-label">
+      Customer
+    </div>
+    <div class="col-md-8">
+      <!-- AI changed: Replaced kendo-combobox with mat-select from Angular Material -->
+      <mat-form-field>
+        <mat-label>Select Customer...</mat-label>
+        <mat-select [(value)]="model.SelectedCustomer"
+                    (selectionChange)="UI.handlers.onCustomerSelectChange($event)">
+          <mat-option *ngFor="let customer of model.CustomerList" [value]="customer.value">
+            {{customer.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <!-- Banners/Division MULTISELECT -->
+  <div class="row">
+    <div class="col-md-2 field-label">
+      Banners/Divisions
+    </div>
+    <div class="col-md-8">
+      <select #bannerselection multiple="multiple" data-placeholder="Select Banners/Divisions..."></select>
+    </div>
+  </div>
+  <!-- Category Combobox -->
+  <div class="row">
+    <div class="col-md-2 field-label">
+      Category
+    </div>
+    <div class="col-md-8">
+      <select #categoryselection multiple="multiple" data-placeholder="Select Category..."></select>
+    </div>
+  </div>
+  <!-- PPGs MULTISELECT -->
+  <div class="row">
+    <div class="col-md-2 field-label">
+      KHBM PPGs
+    </div>
+    <div class="col-md-8">
+      <select #ppgselection multiple="multiple" data-placeholder="Select KHBM PPGs..."></select>
+    </div>
+  </div>
+  <!-- SAP PPGs MULTISELECT -->
+  <div class="row">
+    <div class="col-md-2 field-label">
+      SAP PPGs
+    </div>
+    <div class="col-md-8">
+      <select #sapppgselection multiple="multiple" data-placeholder="Select SAP PPGs..."></select>
+    </div>
+  </div>
+</div>

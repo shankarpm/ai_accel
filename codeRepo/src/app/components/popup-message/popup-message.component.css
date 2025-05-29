@@ -1,0 +1,41 @@
+.hc-scroller {
+  position: relative;
+  padding: 10px 0 0 10px;
+  overflow-y: auto;
+  min-height: 75px;
+  max-height: 162px;
+}
+.hc-container {
+  z-index: 10002;
+  background: white;
+  position: absolute;
+  top: 300px;
+  left: 0;
+  right: 0;
+  width: 390px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0px 2px 8px 0px rgba(184,184,184,1);
+  -moz-box-shadow: 0px 2px 8px 0px rgba(184,184,184,1);
+  box-shadow: 0px 2px 8px 0px rgba(184,184,184,1);
+}
+.k-i-x {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+.k-i-copy {
+  bottom: 2px;
+  position: relative;
+  cursor: pointer;
+}
+
+.k-i-copy:hover {
+  color: black;
+}
+.k-i-copy:active {
+  font-size: 15px;
+}

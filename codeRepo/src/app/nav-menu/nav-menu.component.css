@@ -1,0 +1,351 @@
+/*li .glyphicon {
+    margin-right: 10px;
+}
+
+/* Highlighting rules for nav menu items */
+li.link-active a,
+li.link-active a:hover,
+li.link-active a:focus {
+  background-color: #4189C7;
+  color: white;
+}
+
+.glyphicon {
+  margin-right: 5px;
+}
+
+.navbar-inverse {
+  background-color: #84a8f5;
+}
+
+  .navbar-inverse .navbar-nav > li > a {
+    color: white;
+  }
+
+.navbar-topbar-item {
+  padding: 5px 10px;
+  cursor: pointer;
+  display: inline-block;
+  height: 42px;
+  vertical-align: middle;
+}
+
+.navbar-logo {
+  line-height: 33px;
+}
+
+.navbar-icon {
+  margin-top: 5px;
+}
+
+.navbar-topbar-item .fa {
+  color: #9B9B9B;
+  font-size: 22px;
+}
+
+.navbar-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #84a8f5;
+  height: 50px;
+}
+/* Keep the nav menu independent of scrolling and on top of other items */
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  max-width: 250px;
+}
+
+.navbar-contents {
+  padding-left: 10px;
+}
+
+#nav-icon {
+  max-height: 20px;
+}
+
+@media (min-width: 768px) {
+  /* On small screens, convert the nav menu to a vertical sidebar */
+  .main-nav {
+    height: 100%;
+    width: calc(25% - 20px);
+  }
+
+  .navbar {
+    border-radius: 0;
+    border-width: 0;
+    /*height: calc( 100% - 50px );
+    margin-top: 50px;*/
+  }
+
+  .navbar-header {
+    float: none;
+  }
+
+  .navbar-collapse {
+    /*border-top: 1px solid #444;*/
+    padding: 0;
+  }
+
+  .navbar ul {
+    float: none;
+  }
+
+  .navbar li {
+    float: none;
+    font-size: 15px;
+    margin: 6px;
+  }
+
+    .navbar li a {
+      padding: 10px 16px;
+      border-radius: 4px;
+    }
+
+  .navbar a {
+    /* If a menu item's text is too long, truncate it */
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+/* Toggle Styles */
+#wrapper {
+  padding-left: 0;
+  /*-webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;*/
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+  margin-top: 50px;
+}
+
+  #wrapper.toggled {
+    padding-left: 250px;
+  }
+
+#sidebar-wrapper {
+  z-index: 9999999;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  top: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #204173;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+  .sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+  }
+
+    .sidebar-nav li a {
+      display: block;
+      text-decoration: none;
+      color: white;
+    }
+
+      .sidebar-nav li a:hover {
+        text-decoration: none;
+        color: #fff;
+        background: rgba(255,255,255,0.2);
+      }
+
+      .sidebar-nav li a:active,
+      .sidebar-nav li a:focus {
+        text-decoration: none;
+      }
+
+  .sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+  }
+
+    .sidebar-nav > .sidebar-brand a {
+      color: #999999;
+    }
+
+      .sidebar-nav > .sidebar-brand a:hover {
+        color: #fff;
+        background: none;
+      }
+
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 250px;
+  }
+
+    #wrapper.toggled {
+      padding-left: 0;
+    }
+
+  #sidebar-wrapper {
+    width: 250px;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+
+.navbar-user-name {
+  float: right;
+  color: white;
+  font-weight: bold;
+  padding: 14px;
+  width: auto;
+  font-size: 17px;
+}
+
+
+/* Polaris css */
+li.polaris-menu-item {
+  color: #fff;
+  background-color: #226DA1;
+}
+
+  li.polaris-menu-item a {
+    cursor: pointer;
+  }
+
+ul.polaris-submenu {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+  ul.polaris-submenu li {
+      text-indent: 40px;
+  }
+
+      ul.polaris-submenu li a > span {
+         padding-left: 19px;
+         margin-left: 5px;
+      }
+
+      ul.polaris-submenu li a img {
+          margin-left: 10px;
+          vertical-align: baseline;
+      }
+
+#sidebar-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 11;
+}
+
+.polaris-tooltip {
+  background: #ffffff;
+  box-shadow: 0px 3px 6px #00000029;
+  position: fixed;
+  top: 441px;
+  left: 280px;
+  padding: 24px 20px;
+  text-align: left;
+  color: #1b1b1b;
+  font-weight: normal;
+  font-size: 15px;
+  text-transform: none;
+}
+
+  .polaris-tooltip > div:first-child {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 16px;
+  }
+
+  .polaris-tooltip p {
+      font-size: 15px;
+      line-height: 17px;
+      margin: 5px 0px 14px 0px;
+  }
+
+  .polaris-tooltip div.new-feature-desc {
+      line-height: 17px;
+      margin-bottom: 11px;
+      font-size: 15px;
+  }
+
+    .polaris-tooltip div.new-feature-desc > img {
+      margin-right: 10px;
+    }
+
+  .polaris-tooltip::before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #fff;
+    margin-top: -10px;
+  }
+/* End Polaris css */

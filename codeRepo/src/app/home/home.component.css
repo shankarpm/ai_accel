@@ -1,0 +1,49 @@
+.k-button {
+  background: #204173;
+  color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 28px;
+}
+
+.imagewidget {
+  padding: 5px;
+  margin: 10px;
+  width: 440px;
+  height: 280px;
+  top: 0;
+  line-height: 310px;
+  align-items: center;
+  display: inline-block !important;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 darkgrey;
+}
+
+.k-grid tr.even {
+  background-color: #f45c42;
+}
+
+.k-grid tr.odd {
+  background-color: #41f4df;
+}
+
+.k-grid td.k-state-selected:hover, .k-grid tr:hover {
+  color: #fff;
+  background-color: darkslategray;
+}
+
+.kendoChart {
+  height: 250px !important;
+  margin: 5px 15px 15px 15px;
+}
+
+.chartHeader {
+  font: 16.002px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  float: left;
+  display: inline-block;
+  padding-top: 20px;
+  width:100%;
+}

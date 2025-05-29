@@ -1,0 +1,26 @@
+<div class="hc-container">
+  <span class="k-icon k-i-x" (click)="onClosePopup();"></span>
+  <div class="hc-scroller">
+    <div *ngFor="let item of dataProvider">
+      <div>
+        <b>{{ item.title }}</b>
+        <!--<span class="k-icon k-i-copy" title="Copy to clipboard" (click)="onCopyToClipboard(item)"></span>-->
+      </div>
+      <div style="padding-top: 10px;">
+        <span>{{ item.lable1 }}</span>
+        <span [style.color]="item.data.value1 < 0 ? 'red' : 'black'">
+          {{ item.data.value1 | number : item.format | minusSignToParens }}
+        </span>
+        <span style="margin-left: 5px;">{{ item.lable2 }}</span>
+        <span [style.color]="item.data.value2 < 0 ? 'red' : 'black'">
+          {{ item.data.value2 | number : item.format | minusSignToParens }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI changed: The template itself is correct for Angular 19. The errors need to be fixed in the component's TypeScript file by:
+1. Importing CommonModule for *ngFor and number pipe
+2. Importing and declaring the custom minusSignToParens pipe
+The template syntax remains valid in Angular 19 -->
