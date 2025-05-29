@@ -1,0 +1,9 @@
+# requirements.txt
+streamlit    # For the Streamlit web interface
+# azure-ai-ml
+# azure-ai-openai
+azure-ai-inference
+azure-identity
+python-dotenv==1.0.0      # For loading environment variables (.env)
+azure-ai-generative==1.0.0b3  # For Azure AI inference (includes ChatCompletionsClient)
+# azure-core==1.29.1        # For AzureKeyCredential and core Azure functionality
