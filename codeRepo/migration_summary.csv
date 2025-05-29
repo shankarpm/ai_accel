@@ -1,0 +1,11 @@
+Line Number,Old Code,New Code,Reason
+Line Number,Old Code,New Code,Reason
+18,CardComponent,,Component is standalone and cannot be declared in NgModule
+19,LegacyComponent,,Component is standalone and cannot be declared in NgModule
+,,"CardComponent, LegacyComponent",Standalone components need to be imported instead of declared
+
+2,2,,
+Total Errors Before Fix was 2
+Errors Fixed by LLM was 2
+Unit Tests Passed After Fix was 0
+Unit Tests Failed After Fix was 0
